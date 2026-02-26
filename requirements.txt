@@ -4,7 +4,6 @@ dj-database-url==3.1.2
 Django==5.2.11
 djangorestframework==3.16.1
 gunicorn==25.1.0
-packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1769093650/work
 pillow==12.1.1
 psycopg2==2.9.11
 psycopg2-binary==2.9.11
