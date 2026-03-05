@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th><i class="fas fa-user"></i> Nome</th>
-                    <th><i class="fas fa-id-card"></i> CRM</th>
+                    <th><i class="fas fa-id-card"></i> CRO</th>
                     <th><i class="fas fa-stethoscope"></i> Especialidade</th>
                     <th><i class="fas fa-envelope"></i> Email</th>
                     <th><i class="fas fa-phone"></i> Telefone</th>
@@ -33,7 +33,7 @@
                 {% for dentista in dentistas %}
                     <tr>
                         <td><strong>{{ dentista.nome }}</strong></td>
-                        <td>{{ dentista.crm }}</td>
+                        <td>{{ dentista.cro }}</td>
                         <td>{{ dentista.especialidade|default:"-" }}</td>
                         <td>{{ dentista.email|default:"-" }}</td>
                         <td>{{ dentista.telefone|default:"-" }}</td>

@@ -5,7 +5,7 @@ class Dentista(models.Model):
     email = models.EmailField(blank=True, null=True)
     telefone = models.CharField(max_length=20, blank=True, null=True)
     especialidade = models.CharField(max_length=100, blank=True, null=True)
-    crm = models.CharField(max_length=20, unique=True)
+    cro = models.CharField(max_length=20, blank=True, null=True)
     ativo = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

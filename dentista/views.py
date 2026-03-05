@@ -20,7 +20,7 @@ def criar_dentista(request):
                 email=request.POST.get('email'),
                 telefone=request.POST.get('telefone'),
                 especialidade=request.POST.get('especialidade'),
-                crm=request.POST.get('crm')
+                cro=request.POST.get('cro')
             )
             messages.success(request, 'Dentista criado com sucesso!')
             return redirect('dentista:dentista')
@@ -35,7 +35,7 @@ def editar_dentista(request, pk):
         dentista.email = request.POST.get('email')
         dentista.telefone = request.POST.get('telefone')
         dentista.especialidade = request.POST.get('especialidade')
-        dentista.crm = request.POST.get('crm')
+        dentista.cro = request.POST.get('cro')
         dentista.save()
         messages.success(request, 'Dentista atualizado!')
         return redirect('dentista:detalhe_dentista', pk=dentista.pk)

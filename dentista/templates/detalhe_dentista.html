@@ -29,7 +29,7 @@
                 <i class="fas fa-info-circle"></i> Informações
             </div>
             <div class="card-body">
-                <p><strong>CRM:</strong> {{ dentista.crm }}</p>
+                <p><strong>CRO:</strong> {{ dentista.cro|default:"-" }}</p>
                 <p><strong>Especialidade:</strong> {{ dentista.especialidade|default:"-" }}</p>
                 <p><strong>Email:</strong> {{ dentista.email|default:"-" }}</p>
                 <p><strong>Telefone:</strong> {{ dentista.telefone|default:"-" }}</p>
