@@ -53,7 +53,7 @@
             <div class="card-body">
                 <p><strong>Data de Entrada:</strong> {{ servico.data_entrada|date:"d/m/Y" }}</p>
                 <p><strong>Data Prevista de Saída:</strong> {{ servico.data_prevista_saida|date:"d/m/Y"|default:"-" }}</p>
-                <p><strong>Valor do Serviço:</strong> R$ {{ servico.valor_servico }}</p>
+                <p><strong>Valor do Serviço:</strong> R$ {{ servico.valor_servico|floatformat:2 }}</p>
             </div>
         </div>
     </div>

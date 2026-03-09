@@ -21,6 +21,16 @@ def servico(request):
     })
 
 
+def parse_decimal(value):
+    if not value:
+        return 0
+    value = value.replace('.', '').replace(',', '.')
+    try:
+        from decimal import Decimal
+        return Decimal(value)
+    except:
+        return 0
+
 def detalhe_servico(request, pk):
     servico = get_object_or_404(Servico, pk=pk)
     return render(request, 'detalhe_servico.html', {'servico': servico})
@@ -37,7 +47,7 @@ def criar_servico(request):
                 descricao=request.POST.get('descricao'),
                 data_entrada=request.POST.get('data_entrada'),
                 data_prevista_saida=request.POST.get('data_prevista_saida') or None,
-                valor_servico=request.POST.get('valor_servico') or 0,
+                valor_servico=parse_decimal(request.POST.get('valor_servico')),
                 status=request.POST.get('status', 'REC')
             )
             messages.success(request, 'Serviço criado com sucesso!')
@@ -61,7 +71,7 @@ def editar_servico(request, pk):
         servico.descricao = request.POST.get('descricao')
         servico.data_entrada = request.POST.get('data_entrada')
         servico.data_prevista_saida = request.POST.get('data_prevista_saida') or None
-        servico.valor_servico = request.POST.get('valor_servico') or 0
+        servico.valor_servico = parse_decimal(request.POST.get('valor_servico'))
         servico.valor_pago = request.POST.get('valor_pago') or 0
         servico.status = request.POST.get('status')
         servico.save()
