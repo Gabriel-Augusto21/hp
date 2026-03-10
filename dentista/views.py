@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 def dentista(request):
     dentistas = Dentista.objects.all()
-    paginator = Paginator(dentistas, 5)
+    paginator = Paginator(dentistas, 7)
     page = request.GET.get('page')
     dentistas_paginados = paginator.get_page(page)
     page_range = list(paginator.get_elided_page_range(

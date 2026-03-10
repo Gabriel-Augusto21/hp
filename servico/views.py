@@ -15,7 +15,7 @@ def servico(request):
     if dentista:
         servicos = servicos.filter(dentista_id=dentista)
 
-    paginator = Paginator(servicos, 5)
+    paginator = Paginator(servicos, 8)
     page = request.GET.get('page')
 
     servicos_paginados = paginator.get_page(page)
