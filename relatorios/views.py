@@ -22,7 +22,7 @@ _AZUL_CLA  = colors.HexColor("#d6eaf8")
 _VERMELHO  = colors.HexColor("#c0392b")
 _CINZA_CLA = colors.HexColor("#f2f3f4")
 _CINZA_MED = colors.HexColor("#bdc3c7")
-
+_MARROM    = colors.HexColor("#a0522d")
 
 def _estilos():
     base = getSampleStyleSheet()
@@ -122,9 +122,6 @@ def _pdf_response(conteudo: bytes, nome: str) -> HttpResponse:
     resp["Content-Disposition"] = f'inline; filename="{nome}"'
     return resp
 
-
-# ─── geradores de PDF ────────────────────────────────────────
-
 def _pdf_dashboard(ctx) -> bytes:
     buf = BytesIO()
     doc = _doc_retrato(buf)
@@ -138,6 +135,7 @@ def _pdf_dashboard(ctx) -> bytes:
         ["Finalizados",       str(ctx["por_status"].get("FIN",  0))],
         ["Entregues",         str(ctx["por_status"].get("ENT",  0))],
         ["Cancelados",        str(ctx["por_status"].get("CAN",  0))],
+        ["Provando",         str(ctx["por_status"].get("PRO",  0))],
         ["Atrasados",         str(ctx["servicos_atrasados"])],
         ["Faturamento Total", _r(ctx["valor_total"])],
     ]
@@ -296,9 +294,6 @@ def _pdf_detalhe_dentista(dentista, servicos, vt, periodo=None) -> bytes:
     doc.build(story)
     return buf.getvalue()
 
-
-# ─── helpers ────────────────────────────────────────────────
-
 def _filtros_periodo(request):
     hoje = date.today()
     try:
@@ -320,8 +315,6 @@ def _periodo_str(di, df) -> str:
     return f"{di.strftime('%d/%m/%Y')} a {df.strftime('%d/%m/%Y')}"
 
 
-# ─── views ──────────────────────────────────────────────────
-
 def dashboard(request):
     hoje = timezone.now().date()
     qs = Servico.objects.all()
@@ -330,7 +323,7 @@ def dashboard(request):
     por_status = {item["status"]: item["qtd"] for item in por_status_qs}
 
     atrasados = qs.filter(
-        ~Q(status__in=["ENT", "CAN"]),
+        ~Q(status__in=["ENT", "CAN", "PRO", "FIN"]),
         data_prevista_saida__lt=hoje,
     ).count()
 
@@ -346,6 +339,7 @@ def dashboard(request):
         "qtd_finalizado":     por_status.get("FIN",  0),
         "qtd_entregue":       por_status.get("ENT",  0),
         "qtd_cancelado":      por_status.get("CAN",  0),
+        "qtd_provando":       por_status.get("PRO",  0),
     }
     if request.GET.get("pdf"):
         return _pdf_response(_pdf_dashboard(ctx), "dashboard.pdf")
@@ -424,7 +418,7 @@ def detalhe_dentista(request, pk):
 def servicos_atrasados(request):
     hoje = timezone.now().date()
     qs = (Servico.objects
-          .filter(~Q(status__in=["ENT", "CAN"]),
+          .filter(~Q(status__in=["ENT", "CAN", "PRO", "FIN"]),
                   data_prevista_saida__lt=hoje)
           .select_related("dentista")
           .order_by("data_prevista_saida"))

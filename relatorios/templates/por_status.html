@@ -34,7 +34,8 @@
           {% for d in dados_status %}
           <tr>
             <td>
-              <span class="badge bg-{% if d.status == 'REC' %}warning text-dark{% elif d.status == 'PROD' %}info{% elif d.status == 'FIN' %}primary{% elif d.status == 'ENT' %}success{% else %}secondary{% endif %}">
+              <span class="badge bg-{% if d.status == 'REC' %}warning{% elif d.status == 'PROD' %}info{% elif d.status == 'FIN' %}primary{% elif d.status == 'ENT' %}success{% elif d.status == 'PRO' %}provando{% else %}secondary{% endif %}"
+                    {% if d.status == 'PRO' %}style="background-color: #8B4513 !important;"{% endif %}>
                 {{ d.status_display }}
               </span>
             </td>

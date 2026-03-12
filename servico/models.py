@@ -9,6 +9,7 @@ class Servico(models.Model):
         ('FIN', 'Finalizado'),
         ('ENT', 'Entregue'),
         ('CAN', 'Cancelado'),
+        ('PRO', 'Provando'),
     ]
     
     dentista = models.ForeignKey(Dentista, on_delete=models.CASCADE, null=True, blank=True, related_name='servicos')
@@ -43,6 +44,6 @@ class Servico(models.Model):
     @property
     def atrasado(self):
         from django.utils import timezone
-        if self.status != 'ENT' and self.status != 'FIN' and self.status != 'CAN' and self.data_prevista_saida:
+        if self.status != 'ENT' and self.status != 'FIN' and self.status != 'CAN' and self.status != 'PRO' and self.data_prevista_saida:
             return self.data_prevista_saida < timezone.now().date()
         return False

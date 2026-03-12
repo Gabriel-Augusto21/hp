@@ -106,6 +106,20 @@
             </div>
             <span class="badge ent">Entregue</span>
           </a>
+        {% elif s.status == 'PRO' %}
+          <a class="card" href="{% url 'servico:detalhe_servico' s.pk %}">
+            <div class="barra pro"></div>
+            <div class="info">
+              <div class="titulo">{{ s.tipo_protese }}{% if s.material %} — {{ s.material }}{% endif %}</div>
+              <div class="meta">
+                {% if s.dentista %}<span>Dentista: {{ s.dentista.nome }}</span>{% endif %}
+                {% if s.laboratorio %}<span>Laboratório: {{ s.laboratorio.nome }}</span>{% endif %}
+                {% if s.cliente %}<span>Paciente: {{ s.cliente.nome }}</span>{% endif %}
+                {% if s.descricao %}<span>{{ s.descricao|truncatechars:50 }}</span>{% endif %}
+              </div>
+            </div>
+            <span class="badge pro">Provando</span>
+          </a>
         {% endif %}
 
       {% endfor %}

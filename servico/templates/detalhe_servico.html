@@ -36,7 +36,7 @@
                     {% if servico.atrasado %}
                         <span class="badge bg-danger">ATRASADO</span>
                     {% else %}
-                        <span class="badge bg-{% if servico.status == 'REC' %}warning{% elif servico.status == 'PROD' %}info{% elif servico.status == 'FIN' %}primary{% elif servico.status == 'ENT' %}success{% else %}secondary{% endif %}">
+                        <span class="badge bg-{% if servico.status == 'REC' %}warning{% elif servico.status == 'PROD' %}info{% elif servico.status == 'FIN' %}primary{% elif servico.status == 'ENT' %}success{% elif servico.status == 'PRO' %}provando{% else %}secondary{% endif %}" {% if servico.status == 'PRO' %}style="background-color: #8B4513 !important;"{% endif %}>
                             {{ servico.get_status_display }}
                         </span>
                     {% endif %}

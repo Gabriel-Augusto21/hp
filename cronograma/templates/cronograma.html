@@ -24,6 +24,7 @@
   <span class="leg"><span class="leg-dot" style="background:var(--laranja)"></span>Finalizado</span>
   <span class="leg"><span class="leg-dot" style="background:var(--verde)"></span>Entregue</span>
   <span class="leg"><span class="leg-dot" style="background:var(--vermelho)"></span>Atrasado</span>
+  <span class="leg"><span class="leg-dot" style="background:var(--marrom)"></span>Provando</span>
 </div>
 
 <div class="cal-wrap">
@@ -47,7 +48,7 @@
               <span class="num">{{ cel.dia }}</span>
 
               <div class="chips">
-                {% for s in cel.servicos|slice:":4" %}
+                {% for s in cel.servicos|slice:":5" %}
                   {% if s.atrasado %}
                     <span class="chip atras" title="{{ s.tipo_protese }} — {{ s.dentista.nome }}">{{ s.tipo_protese }}</span>
                   {% elif s.status == 'REC' %}
@@ -58,6 +59,8 @@
                     <span class="chip fin"   title="{{ s.tipo_protese }} — {{ s.dentista.nome }}">{{ s.tipo_protese }}</span>
                   {% elif s.status == 'ENT' %}
                     <span class="chip ent"   title="{{ s.tipo_protese }} — {{ s.dentista.nome }}">{{ s.tipo_protese }}</span>
+                  {% elif s.status == 'PRO' %}
+                    <span class="chip pro"   title="{{ s.tipo_protese }} — {{ s.dentista.nome }}">{{ s.tipo_protese }}</span>
                   {% endif %}
                 {% endfor %}
                 {% if cel.servicos|length > 4 %}
@@ -92,6 +95,11 @@
                     {% elif s.status == 'ENT' %}
                       <span class="cc-row ent">
                         <span class="cc-dot" style="background:var(--verde)"></span>
+                        {{ s.tipo_protese|truncatechars:8 }}
+                      </span>
+                    {% elif s.status == 'PRO' %}
+                      <span class="cc-row pro">
+                        <span class="cc-dot" style="background:var(--marrom)"></span>
                         {{ s.tipo_protese|truncatechars:8 }}
                       </span>
                     {% endif %}

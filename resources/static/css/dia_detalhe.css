@@ -15,6 +15,7 @@
   --laranja: #f97316;
   --azul: #3b82f6;
   --roxo: #8b5cf6;
+  --marrom: #a0522d;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -124,6 +125,7 @@ body {
 .barra.fin   { background: var(--laranja); }
 .barra.ent   { background: var(--verde); }
 .barra.atras { background: var(--vermelho); }
+.barra.pro   { background: var(--marrom); }
 
 .info { flex: 1; min-width: 0; }
 

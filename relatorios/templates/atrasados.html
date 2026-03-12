@@ -47,7 +47,7 @@
               <span class="badge bg-danger">{{ s.dias_atraso }} dia(s)</span>
             </td>
             <td>
-              <span class="badge bg-{% if s.status == 'REC' %}warning text-dark{% elif s.status == 'PROD' %}info{% elif s.status == 'FIN' %}primary{% else %}secondary{% endif %}">
+              <span class="badge bg-{% if s.status == 'REC' %}warning text-dark{% elif s.status == 'PROD' %}info">
                 {{ s.get_status_display }}
               </span>
             </td>
